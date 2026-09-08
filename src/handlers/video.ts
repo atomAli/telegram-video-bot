@@ -1,5 +1,5 @@
 import { Context, Bot } from "grammy";
-import { config } from "../config";
+import { config } from "../config.js";
 
 function unauthorizedText(): string {
   return "Sorry, you are not authorized to use this bot.";
@@ -54,7 +54,7 @@ export async function registerHandlers(bot: Bot): Promise<void> {
       const buffer = Buffer.from(await response.arrayBuffer());
 
       const key = `videos/${Date.now()}-${Math.random().toString(36).slice(2)}.mp4`;
-      const { uploadVideo } = await import("../storage");
+      const { uploadVideo } = await import("../storage.js");
       const publicUrl = await uploadVideo(key, buffer);
 
       await ctx.reply(`Here is your streamable link:\n${publicUrl}`);
